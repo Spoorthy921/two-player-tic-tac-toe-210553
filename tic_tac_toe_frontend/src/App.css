@@ -1,0 +1,244 @@
+/* Retro Tic Tac Toe Theme (light, centered) */
+:root {
+  /* Style guide accents */
+  --accent-primary: #3b82f6; /* blue */
+  --accent-success: #06b6d4; /* cyan */
+
+  /* Surface + text */
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #64748b;
+
+  /* Retro-ish borders/shadows */
+  --border: rgba(17, 24, 39, 0.18);
+  --border-strong: rgba(17, 24, 39, 0.28);
+
+  --shadow: 0 14px 30px rgba(17, 24, 39, 0.10);
+  --shadow-hard: 0 2px 0 rgba(17, 24, 39, 0.35);
+
+  --radius: 16px;
+  --square-radius: 12px;
+
+  --font-retro: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.App {
+  min-height: 100vh;
+  background: radial-gradient(
+      900px 540px at 50% 20%,
+      rgba(59, 130, 246, 0.12),
+      rgba(6, 182, 212, 0.06) 35%,
+      transparent 70%
+    ),
+    var(--bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  padding: 28px 16px;
+  box-sizing: border-box;
+}
+
+.ttt-shell {
+  width: min(520px, 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), #ffffff);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 18px 16px;
+}
+
+.ttt-header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.ttt-title {
+  font-family: var(--font-retro);
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.15;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.ttt-subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-family: var(--font-retro);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.ttt-stage {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.ttt-board {
+  width: min(360px, 92vw);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  padding: 14px;
+  border-radius: calc(var(--radius) - 4px);
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(59, 130, 246, 0.06), rgba(6, 182, 212, 0.05)),
+    var(--surface);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.ttt-square {
+  font-family: var(--font-retro);
+  font-size: clamp(34px, 7vw, 56px);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(180deg, #ffffff, #f6f7fb);
+  color: var(--text);
+
+  border: 2px solid var(--border-strong);
+  border-radius: var(--square-radius);
+
+  /* blocky button feel */
+  box-shadow: var(--shadow-hard);
+  transform: translateY(0);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: transform 120ms ease, border-color 120ms ease,
+    background-color 120ms ease, box-shadow 120ms ease, outline-color 120ms ease;
+}
+
+.ttt-square:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(59, 130, 246, 0.55);
+}
+
+.ttt-square:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.35);
+}
+
+.ttt-square:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.45);
+  outline-offset: 2px;
+}
+
+.ttt-square:disabled {
+  cursor: not-allowed;
+  opacity: 0.95;
+}
+
+.ttt-square.is-filled {
+  background: linear-gradient(180deg, #ffffff, #eef2ff);
+}
+
+.ttt-square.is-winning {
+  border-color: rgba(6, 182, 212, 0.75);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 182, 212, 0.22),
+    rgba(59, 130, 246, 0.10)
+  );
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2), var(--shadow-hard);
+}
+
+.ttt-controls {
+  width: min(360px, 92vw);
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+
+.ttt-status {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-retro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 14px;
+
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(17, 24, 39, 0.28);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.ttt-status.is-final {
+  border-color: rgba(6, 182, 212, 0.65);
+  background: rgba(6, 182, 212, 0.10);
+}
+
+.ttt-restart {
+  width: 100%;
+  font-family: var(--font-retro);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid rgba(59, 130, 246, 0.75);
+  color: #0b1220;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 130, 246, 0.22),
+    rgba(6, 182, 212, 0.18)
+  );
+
+  box-shadow: var(--shadow-hard);
+  cursor: pointer;
+
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.ttt-restart:hover {
+  transform: translateY(-1px);
+  opacity: 0.98;
+}
+
+.ttt-restart:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.35);
+}
+
+.ttt-footer {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.ttt-hint {
+  font-family: var(--font-retro);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+@media (max-width: 420px) {
+  .ttt-shell {
+    padding: 18px 14px 14px;
+  }
+
+  .ttt-title {
+    font-size: 22px;
+  }
+
+  .ttt-board {
+    gap: 8px;
+    padding: 12px;
+  }
+}
